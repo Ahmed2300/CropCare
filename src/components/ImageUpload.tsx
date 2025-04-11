@@ -252,8 +252,6 @@ const ImageUpload: React.FC<ImageUploadProps> = ({ onImageSelected }) => {
             >
               <RefreshCw className="w-6 h-6" />
             </button>
-            {/* Capture Button - Keep white, maybe add subtle border */}
-           {isTorchSupported && (
             <button
             onClick={toggleTorch}
             className="bg-white/20 backdrop-blur-sm text-white rounded-full p-3 shadow-lg hover:bg-white/30 transition-colors disabled:opacity-50"
@@ -262,7 +260,10 @@ const ImageUpload: React.FC<ImageUploadProps> = ({ onImageSelected }) => {
             >
                {isTorchOn ? <Zap className="w-6 h-6" /> : <ZapOff className="w-6 h-6" />}
             </button>
-           )}
+             {/* Capture Button - Keep white, maybe add subtle border */}
+           
+            {/* Capture Button - Keep white, maybe add subtle border */}
+            
               <button
                 onClick={capturePhoto}
                 className="bg-white rounded-full p-4 shadow-lg border border-gray-200 disabled:opacity-50"
@@ -271,6 +272,7 @@ const ImageUpload: React.FC<ImageUploadProps> = ({ onImageSelected }) => {
               >
                 {/* Use primary color for icon */}
                 <Camera className="w-8 h-8 text-primary" />
+               
               </button>
             {/* Stop/Cancel Button */}
             <button
