@@ -8,10 +8,23 @@ interface HistoryItem {
   date: string;
   imageUrl: string;
   cropName: string;
-  diseaseDetected: boolean;
-  diseaseName: string;
-  confidencePercentage: number;
-  results: any;
+    diseaseDetected: boolean;
+    diseaseName: string;
+    confidencePercentage: number;
+    results: {
+        crop_name: string;
+        disease_detected: boolean;
+        disease_name: string;
+        confidence_percentage: number;
+        danger_level: number;
+        symptoms: string[];
+        treatments: string[];
+        prevention_tips: string[];
+        disease_description: string
+    };
+    diseaseName: string;
+    confidencePercentage: number;
+    
 }
 
 const History: React.FC = () => {

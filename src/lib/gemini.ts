@@ -7,7 +7,22 @@ interface Location {
   longitude: number;
 }
 
-export async function analyzeImage(imageData: string, language: string = 'en', location?: Location): Promise<any> {
+interface AnalysisResult {
+  crop_name: string;
+  disease_detected: boolean;
+  disease_name: string;
+  confidence_percentage: number;
+  danger_level: number;
+  symptoms: string[];
+  treatments: string[];
+  prevention_tips: string[];
+  disease_description: string;
+}
+
+
+
+export async function analyzeImage(imageData: string, language: string = 'en', location?: Location): Promise<AnalysisResult> {
+
   try {
     let base64Image: string;
     

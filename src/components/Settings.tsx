@@ -16,7 +16,7 @@ const Settings: React.FC<SettingsProps> = ({ onLocationToggle }) => {
     
     if (newState) {
       try {
-        const position = await new Promise<GeolocationPosition>((resolve, reject) => {
+        await new Promise<GeolocationPosition>((resolve, reject) => {
           navigator.geolocation.getCurrentPosition(resolve, reject);
         });
         onLocationToggle(true);

@@ -30,24 +30,29 @@ const ResultsDisplay: React.FC<ResultsProps> = ({ results, imageUrl, onReset }) 
   });
 
   return (
-    <div className="bg-white rounded-lg shadow-lg overflow-hidden mb-20">
-      {/* Header Image Section */}
-      <div className="relative h-64">
+    // Use standard rounding and shadow, adjust bottom margin
+    <div className="bg-white rounded-xl shadow-md overflow-hidden mb-8"> 
+      {/* Header Image Section - Keep relative height */}
+      <div className="relative h-64"> 
         <img 
           src={imageUrl} 
           alt={results.crop_name}
           className="w-full h-full object-cover"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/60" />
+         {/* Slightly stronger gradient */}
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/20 to-black/70" />
         <div className="absolute bottom-0 left-0 p-6 text-white">
-          <h1 className="text-4xl font-bold mb-2">{results.crop_name}</h1>
-          <p className="text-sm opacity-90">{currentDate}</p>
+           {/* Use heading font, slightly smaller size */}
+          <h1 className="text-3xl font-heading font-bold mb-1">{results.crop_name}</h1> 
+           {/* Lighter text for date */}
+          <p className="text-sm text-gray-200">{currentDate}</p> 
         </div>
-        <div className="absolute top-6 right-6">
-          <span className={`px-4 py-2 rounded-full text-sm font-medium ${
+        <div className="absolute top-4 right-4"> 
+           {/* Use primary color for healthy */}
+          <span className={`px-3 py-1 rounded-full text-xs font-semibold ${ 
             results.disease_detected 
               ? 'bg-red-500 text-white' 
-              : 'bg-emerald-500 text-white'
+              : 'bg-primary text-white' 
           }`}>
             {results.disease_detected ? t('results.diseased') : t('results.healthy')}
           </span>
@@ -57,24 +62,30 @@ const ResultsDisplay: React.FC<ResultsProps> = ({ results, imageUrl, onReset }) 
       {/* Content Section */}
       <div className="p-6">
         <div className="mb-8">
-          <h2 className="text-2xl font-semibold text-green-700 mb-4">
-            {results.disease_detected ? 'Disease Detected' : 'Analysis Results'}
+           {/* Use heading font, secondary color */}
+          <h2 className="text-2xl font-heading font-semibold text-secondary mb-4"> 
+            {results.disease_detected ? t('results.diseaseDetected') : t('results.analysisResults')}
           </h2>
-          <h3 className="text-xl font-medium text-gray-900 mb-3">
-            {results.disease_detected ? results.disease_name : 'None Detected'}
+           {/* Use heading font, base text color */}
+          <h3 className="text-xl font-heading font-medium text-base-text mb-2"> 
+            {results.disease_detected ? results.disease_name : t('results.noneDetected')}
           </h3>
-          <p className="text-gray-600 mb-6">{results.disease_description}</p>
+           {/* Use subtle text color */}
+          <p className="text-subtle-text mb-6 leading-relaxed">{results.disease_description}</p> 
 
           {/* Confidence and Danger Level Bars */}
-          <div className="space-y-4">
+          <div className="space-y-5"> 
             <div>
               <div className="flex justify-between mb-1">
-                <span className="text-sm font-medium text-gray-700">{t('results.confidence')}</span>
-                <span className="text-sm font-medium text-gray-700">{results.confidence_percentage}%</span>
+                 {/* Use base text color */}
+                <span className="text-sm font-medium text-base-text">{t('results.confidence')}</span> 
+                 {/* Use base text color */}
+                <span className="text-sm font-medium text-base-text">{results.confidence_percentage}%</span> 
               </div>
-              <div className="h-2 bg-gray-200 rounded-full">
+               {/* Use lighter background for bar */}
+              <div className="h-2 bg-gray-100 rounded-full"> 
                 <div
-                  className="h-2 rounded-full bg-green-500"
+                  className="h-2 rounded-full bg-primary"
                   style={{ width: `${results.confidence_percentage}%` }}
                 />
               </div>
@@ -82,13 +93,16 @@ const ResultsDisplay: React.FC<ResultsProps> = ({ results, imageUrl, onReset }) 
 
             <div>
               <div className="flex justify-between mb-1">
-                <span className="text-sm font-medium text-gray-700">{t('results.dangerLevel')}</span>
-                <span className="text-sm font-medium text-gray-700">{results.danger_level}%</span>
+                 {/* Use base text color */}
+                <span className="text-sm font-medium text-base-text">{t('results.dangerLevel')}</span> 
+                 {/* Use base text color */}
+                <span className="text-sm font-medium text-base-text">{results.danger_level}%</span> 
               </div>
-              <div className="h-2 bg-gray-200 rounded-full">
+               {/* Use lighter background for bar */}
+              <div className="h-2 bg-gray-100 rounded-full"> 
                 <div
-                  className={`h-2 rounded-full ${
-                    results.disease_detected ? 'bg-red-500' : 'bg-gray-400'
+                  className={`h-2 rounded-full ${ 
+                    results.disease_detected ? 'bg-red-500' : 'bg-gray-300' 
                   }`}
                   style={{ width: `${results.danger_level}%` }}
                 />
@@ -101,27 +115,37 @@ const ResultsDisplay: React.FC<ResultsProps> = ({ results, imageUrl, onReset }) 
           <>
             {/* Symptoms Section */}
             <div className="mb-6">
-              <h4 className="text-lg font-medium text-gray-900 mb-3">{t('results.symptoms')}</h4>
+               {/* Use heading font, base text color */}
+              <h4 className="text-lg font-heading font-medium text-base-text mb-3">{t('results.symptoms')}</h4> 
               <ul className="space-y-2">
-                {results.symptoms.map((symptom, index) => (
-                  <li key={index} className="flex items-center text-gray-600">
-                    <span className="w-2 h-2 bg-red-500 rounded-full mr-3"></span>
+                {results.symptoms.map((symptom, index) => (                   
+                <li key={`symptom-${index}`} className="flex items-start text-subtle-text">
+                   {/* Use subtle text color */}
+                  <li key={`symptom-${index}`} className="flex items-start text-subtle-text">
+                    {/* Use accent color for bullet */}                   
+                   
+                    <span className="w-1.5 h-1.5 bg-accent rounded-full mr-3 mt-1 flex-shrink-0"></span>
                     {symptom}
                   </li>
-                ))}
+                </li>))}
               </ul>
             </div>
 
             {/* Treatments Section */}
             <div className="mb-6">
-              <h4 className="text-lg font-medium text-gray-900 mb-3">{t('results.treatments')}</h4>
+               {/* Use heading font, base text color */}
+              <h4 className="text-lg font-heading font-medium text-base-text mb-3">{t('results.treatments')}</h4> 
               <ul className="space-y-2">
-                {results.treatments.map((treatment, index) => (
-                  <li key={index} className="flex items-center text-gray-600">
-                    <span className="w-2 h-2 bg-green-500 rounded-full mr-3"></span>
+                {results.treatments.map((treatment, index) => (                   
+                <li key={`treatment-${index}`} className="flex items-start text-subtle-text">
+                   {/* Use subtle text color */}
+                  <li key={`treatment-${index}`} className="flex items-start text-subtle-text">
+                    {/* Use primary color for bullet */}
+                   
+                    <span className="w-1.5 h-1.5 bg-primary rounded-full mr-3 mt-1 flex-shrink-0"></span>
                     {treatment}
                   </li>
-                ))}
+                </li>))}
               </ul>
             </div>
           </>
@@ -129,23 +153,28 @@ const ResultsDisplay: React.FC<ResultsProps> = ({ results, imageUrl, onReset }) 
 
         {/* Prevention Tips Section */}
         <div className="mb-6">
-          <h4 className="text-lg font-medium text-gray-900 mb-3">{t('results.preventionTips')}</h4>
+           {/* Use heading font, base text color */}
+          <h4 className="text-lg font-heading font-medium text-base-text mb-3">{t('results.preventionTips')}</h4> 
           <ul className="space-y-2">
-            {results.prevention_tips.map((tip, index) => (
-              <li key={index} className="flex items-center text-gray-600">
-                <span className="w-2 h-2 bg-blue-500 rounded-full mr-3"></span>
+            {results.prevention_tips.map((tip, index) => (                   
+              <li key={`prevention-${index}`} className="flex items-start text-subtle-text">
+               {/* Use subtle text color */}
+              <li key={`prevention-${index}`} className="flex items-start text-subtle-text">
+                 {/* Use secondary color for bullet */}
+                
+                <span className="w-1.5 h-1.5 bg-secondary rounded-full mr-3 mt-1 flex-shrink-0"></span> 
                 {tip}
               </li>
-            ))}
+            </li>))}
           </ul>
         </div>
 
-        {/* Back Button */}
+        {/* Back Button - Use theme colors, consistent style */}
         <button
           onClick={onReset}
-          className="mt-6 inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
+          className="mt-6 inline-flex items-center px-5 py-2.5 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-primary hover:bg-secondary focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary transition-colors"
         >
-          <ArrowLeft className="w-4 h-4 mr-2" />
+          <ArrowLeft className="w-4 h-4 mr-2 -ml-1" /> 
           {t('results.analyzeAnother')}
         </button>
       </div>
